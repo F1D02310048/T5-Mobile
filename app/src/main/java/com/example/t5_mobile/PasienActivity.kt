@@ -1,7 +1,7 @@
 package com.example.pasienlogin
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -17,26 +17,42 @@ class PasienActivity : AppCompatActivity() {
         binding = ActivityPasienBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 1. Setup Tampilan List
         binding.rvPasien.layoutManager = LinearLayoutManager(this)
+        binding.tvWelcome.text = "Administrator"
 
+        // 2. Logika Tombol Logout (Kembali ke Login)
+        binding.btnLogout.setOnClickListener {
+            // Memberitahu sistem untuk pindah halaman
+            val intent = Intent(this, MainActivity::class.java)
+
+            // Menghapus semua tumpukan halaman agar tidak bisa klik "back"
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            startActivity(intent)
+
+            // Menutup halaman daftar pasien
+            finish()
+
+            Toast.makeText(this, "Berhasil Keluar", Toast.LENGTH_SHORT).show()
+        }
+
+        // 3. Load Data dari API
         val token = intent.getStringExtra("USER_TOKEN") ?: ""
+        loadDataPasien("Bearer $token")
+    }
 
+    private fun loadDataPasien(token: String) {
         lifecycleScope.launch {
             try {
-                // Memanggil API
                 val response = RetrofitClient.instance.getPasien(token)
-
                 if (response.success) {
-                    // Masukkan data ke Adapter
-                    val listData: List<Pasien> = response.data
-                    binding.rvPasien.adapter = PasienAdapter(listData)
-                } else {
-                    Toast.makeText(this@PasienActivity, response.message ?: "Gagal", Toast.LENGTH_SHORT).show()
+                    binding.rvPasien.adapter = PasienAdapter(response.data)
                 }
             } catch (e: Exception) {
-                Log.e("API_ERROR", "Error: ${e.message}")
-                Toast.makeText(this@PasienActivity, "Terjadi kesalahan koneksi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PasienActivity, "Gagal memuat data", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+
