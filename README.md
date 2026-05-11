@@ -101,16 +101,38 @@ Authorization: Bearer {token}
 # 🔑 Akun Login Testing
 
 ```text
-Ussername    : admin@example.com
+Username : admin@example.com
 Password : password
 ```
+
+---
+ # 📸 Percobaan Postman
+ <img width="1224" height="951" alt="Screenshot 2026-05-11 100219(1)" src="https://github.com/user-attachments/assets/cbb2981f-1925-44f0-a455-7ed8daa4871f" />
+
+ <img width="1191" height="933" alt="Screenshot 2026-05-11 100258" src="https://github.com/user-attachments/assets/0ad1506d-8758-49ce-82e3-a7f5a990e6f0" />
+
+
 
 ---
 
 # 📸 Tampilan Aplikasi
 
-- Halaman Login
-- Daftar Data Pasien menggunakan RecyclerView
+- **Halaman Login**
+
+  <img width="376" height="789" alt="Screenshot 2026-05-11 090042" src="https://github.com/user-attachments/assets/80077d70-9b61-412e-8952-93f666685ff0" />
+
+
+
+  
+  <img width="419" height="881" alt="Screenshot 2026-05-11 103320" src="https://github.com/user-attachments/assets/17c40883-d7aa-4bb4-b68d-ede7abebf818" />
+
+
+
+- **Daftar Data Pasien menggunakan RecyclerView**
+  
+
+  <img width="445" height="916" alt="Screenshot 2026-05-11 103502" src="https://github.com/user-attachments/assets/eca96484-158e-4813-ba92-27fd55903b9a" />
+
 
 ---
 
